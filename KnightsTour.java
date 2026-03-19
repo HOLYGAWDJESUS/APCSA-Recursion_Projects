@@ -4,13 +4,14 @@ public class KnightsTour {
 
     private int[][] board;
 
-    public static final int N = 8;
+    private static int N;
 
     static int[] updown = {-2, -2, -1, -1, 1, 1, 2, 2};
     static int[] leftright = {-1, 1, -2, 2, -2, 2, -1, 1};
 
-    public KnightsTour(int[][] data) {
+    public KnightsTour(int[][] data, int gridsize) {
         board = data;
+        N = gridsize;
     }
 
     static class Move {
@@ -70,7 +71,7 @@ public class KnightsTour {
 
         List<Move> nextMovesList = new ArrayList<>();
 
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < N; i++) {
             int currow = initialX + updown[i];
             int curcol = initialY + leftright[i];
 
@@ -94,7 +95,7 @@ public class KnightsTour {
     }
 
     public boolean valid(int x, int y) {
-        if (x > 7 || y > 7 || x < 0 || y < 0) {
+        if (x > N - 1 || y > N - 1 || x < 0 || y < 0) {
             return false;
         } else if (board[x][y] != 0) {
             return false;

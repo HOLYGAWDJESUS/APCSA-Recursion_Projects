@@ -21,7 +21,7 @@ public class Main
             choice = in.nextLine();
         }
 
-        int [][] data = new int[8][8];
+        int [][] data;
         
         if(Integer.parseInt(choice) == 1)
         {
@@ -37,14 +37,58 @@ public class Main
         }
         else
         {
-            for (int i = 0; i < 1000; i++){
-            int ranx = (int)(8*Math.random());
-            int rany = (int)(8*Math.random());
-            KnightsTour tour = new KnightsTour(data);
-            System.out.println(tour.playRandom(data, ranx, rany, 1));
-            for (int k = 0; k < data.length; k++)
-            Arrays.fill(data[k], 0);
+            System.out.println("Please select which of the option to run");
+            System.out.println("1) Warnsdorff's rule traversal statistics");
+            System.out.println("2) Full successful run");
+
+            String sOption = in.nextLine();
+            int option = Integer.parseInt(sOption);
+
+            while (option != 1 && option != 2) {
+                System.out.println("Please input valid input from menu above");
+                option = Integer.parseInt(sOption);
+            }
+
+            System.out.println("Select size of grid");
+            int gridsize = Integer.parseInt(in.nextLine());
+
+            data = new int[gridsize][gridsize];
+
+            if (option == 1) {
+                int finished = 0;
+                int incomplete = 0;
+                for (int i = 0; i < 5000; i++){
+
+                    int ranx = (int)(gridsize*Math.random());
+                    int rany = (int)(gridsize*Math.random());
+
+                    KnightsTour tour = new KnightsTour(data, gridsize);
+                    boolean tf = tour.playRandom(data, ranx, rany, 1);
+
+                    if (tf) {
+                        finished++;
+                    } else {
+                        incomplete++;
+                    }
+
+                    for (int k = 0; k < data.length; k++) {
+                        Arrays.fill(data[k], 0);
+                    }
+                }
+
+                System.out.println("Success Rate = " + (((double) (finished)) / (finished + incomplete)));
+                System.out.println("Out of 5000, " + finished + " successfully completed the Knight's Tour");
+            }
+
+            if (option == 2) {
+                int ranx = (int)(gridsize*Math.random());
+                int rany = (int)(gridsize*Math.random());
+                KnightsTour tour = new KnightsTour(data, gridsize);
+                System.out.println("Success? " + tour.playRandom(data, ranx, rany, 1));
+                tour.printBoard(data);
+
             }
         }
+        in.close();
     }
 }
