@@ -33,7 +33,23 @@ public class Main
         else if(Integer.parseInt(choice) == 2)
         {
             data = ReadFile.read("maze");
-            new Maze(data);
+            Maze maze = new Maze(data);
+
+            maze.printMaze(maze.getGrid());
+
+            boolean mazeSuccess = maze.tour(0, 0, data);
+            
+            if (mazeSuccess) {
+                System.out.println("The maze can be successfully navigated.");
+            }
+            if (!mazeSuccess) {
+                System.out.println("The maze cannot be successfully navigated.");
+            }
+
+            maze.printMaze(data);
+
+            
+
         }
         else
         {

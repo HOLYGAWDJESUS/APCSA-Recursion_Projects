@@ -118,7 +118,7 @@ public class KnightsTour {
     public void printBoard(int[][] board) {
         for (int r = 0; r < N; r++) {
             for (int c = 0; c < N; c++) {
-                System.out.printf("%2d ", board[r][c]);
+                System.out.printf("%3d ", board[r][c]);
             }
             System.out.println();
         }

@@ -27,7 +27,7 @@ public class ReadFile{
         while(in.hasNext()){
           int row = in.nextInt();
           int col = in.nextInt();
-          data[row][col] = 1;
+          data[row][col] = -1;
         }     
       }
       else{
